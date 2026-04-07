@@ -1,0 +1,6 @@
+# obsidian
+.obsidian/
+
+# editor (vim)
+*.swp
+*.swo
