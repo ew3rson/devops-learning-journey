@@ -22,3 +22,10 @@ este documento é composto por descrições de comandos no contexto de redes em 
 - `inet` — é onde se localiza o endereço **IPv4**, exibe um para cada interface disponível
 - `inet6` — refere-se ao endereço **IPv6**, a linha seguida por `scope link` indica este endereço na interface `eth0`, usado para comunicação apenas na rede local *(link-local)*.
 
+---
+
+```bash
+$ ip route # exibe informações sobre o gateway da rede atual
+```
+
+> `default via 192.168.1.1` indica que todo tráfego sem destino definido será enviado para `192.168.1.1` , que é o gateway.
