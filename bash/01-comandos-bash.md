@@ -13,7 +13,10 @@ este glossário serve como um guia rápido de comandos do interpretador Bash par
 5. [saída e exibição](#saída-e-exibição)  
 6. [listagem e navegação](#listagem-e-navegação)  
 7. [gerenciamento de arquivos e diretórios](#gerenciamento-de-arquivos-e-diretórios)  
-8. [edição de texto](#edição-de-texto)
+8. [gerenciamento de armazenamento](#gerenciamento-de-armazenamento)
+9. [compactar e extrair arquivos](#compactar-e-extrair-arquivos)
+10. [Secure Shell (SSH)](#secure-shell-ssh)
+11. [edição de texto](#edição-de-texto)
 
 ## informações do usuário e ambiente
 
@@ -29,6 +32,11 @@ $ echo ~
 
 $ echo $0
 # exibe o nome do shell em uso
+
+$ file <arquivo>
+# exibe informações do arquivo
+# 'ELF' se refere a um arquivo binário
+# 'data' se refere a um arquivo cujo tipo não pôde ser identificado
 ```
 
 >[!TIP]
@@ -45,6 +53,10 @@ $ top
 
 $ pstree
 # exibe os processos em formato de árvore
+
+$ pgrep -f <pid>
+# pesquisa processo pelo pid
+# não retorna nada se o processo não estiver ativo
 ```
 
 ## gerenciamento de usuários
@@ -262,6 +274,9 @@ $ rm -rf pasta/
 $ rmdir pasta_vazia
 # remove um diretório, mas apenas se ele estiver vazio
 
+$ ln -s <path> <atalho>
+# cria symbolic link de um diretório 
+
 $ wget <link>
 # faz o download do arquivo do link
 
@@ -270,6 +285,80 @@ $ wget -O <path> <link>
 
 $ curl <url>
 # transfere o conteúdo da página/servidor para o terminal e permite interagir com sua API 
+```
+
+## gerenciamento de armazenamento
+
+```bash
+$ df -h ~
+# exibe informações do armazenamento
+# -h torna as informações human-readable
+
+$ du -h ~
+# exibe as informações de forma detalhada por diretório
+
+$ free -m
+# exibe informações da memória
+```
+
+## compactar e extrair arquivos
+
+```bash
+$ tar czf <arquivo.tar.gz> <arquivo>
+# --create --gzip --file 
+# cria e compacta arquivo e especifica o nome
+
+$ tar --create --xz --file <arquivo>
+# define extensão .xz ao invés de .gz
+
+$ tar --create --xz --file <arquivo> --directory ~/.local
+# define o diretório do arquivo a ser extraído 
+
+$ tar --extract --file --xz <arquivo.xz>
+# `tar xf <arquivo.xz` também funciona
+
+$ tar xzf <arquivo.tar.gz>
+# --extract --gzip --file
+# extrai arquivo
+
+$ unzip <arquivo.zip>
+# descompacta arquivo
+# funciona apenas com arquivos .zip
+
+$ tar --list --files <arquivo.tar>
+# lista conteúdo do arquivo compactado
+```
+
+## Secure Shell (SSH)
+
+```bash
+$ sudo systemctl enable --now sshd
+# ativa o daemon do ssh (sshd)
+# systemctl controla serviços do sistema
+# a flag --now torna a mudança imediata
+
+$ systemctl is-active sshd
+# verifica se o daemon foi ativado
+
+$ systemctl status sshd
+# exibe informações detalhadas do daemon
+
+$ ssh username@hostname
+# permite se conectar a um dispositivo remoto
+# o @ define a conexão
+# o username define o nome de usuário a ser exibido
+# hostname costuma ser o endereço IP do dispositivo
+
+$ scp ~/Documents/arquivo.md username@hostname:~/Documents
+# copia o arquivo para o dispositivo remoto
+# é possível fazer o contrário invertendo a ordem dos argumentos
+
+$ ssh-keygen -t ed25519
+# gera um par de chaves SSH (SSH key pair), uma é privada e outra pública 
+# a flag -t é usada para definir o algoritmo da criptografia (ed25519)
+
+$ ssh-copy-id username@hostname
+# copia a chave SSH pública para o dispositivo remoto
 ```
 
 ## edição de texto
