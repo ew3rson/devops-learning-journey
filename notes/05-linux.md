@@ -23,4 +23,15 @@ estas anotações são registros sobre o sistema operacional GNU/Linux para ente
 > [!IMPORTANT]
 > é possível **manipular** quase tudo do sistema através da linha de comando **justamente** porque o Linux **abstrai** o hardware e as configurações em **arquivos**. 
 - é extremamente seguro, pois segue o conceito de **privilégio mínimo** — um usuário comum **não** pode realizar alterações críticas no sistema, apenas o **superusuário (root)** pode, através do comando `sudo` **(substitute user/superuser do)**.
+- o Linux não identifica o **tipo** de um arquivo pela sua **extensão**, ao invés disso, o sistema verifica o conteúdo do arquivo e/ou seu **cabeçalho (header)** — conhecidos como *magic numbers* — e os **compara** com uma lista de tipos conhecidos pelo sistema, se um arquivo não possui um **tipo conhecido** pelo sistema, ele recebe o tipo `data`.
+> [!TIP]
+> o banco de dados dos tipos conhecidos — conhecido como **Magic Database** — é encontrado em `/usr/share/file/magic.mgc`.  
+> para tornar o conteúdo de um binário *human-readable* usa-se o comando `strings`.
+> `$ strings /usr/share/file/magic.mgc`.
 
+## diretórios importantes
+
+- `/etc` — possui arquivos de configuração
+- `/tmp` — armazena arquivos temporários e os remove após 30 dias
+- `/usr` — contém comandos e aplicações
+- `/var` — armazena arquivos que variam de tamanho durante a execução do sistema.
