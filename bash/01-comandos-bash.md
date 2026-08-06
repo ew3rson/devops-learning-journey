@@ -14,15 +14,19 @@ este glossário serve como um guia rápido de comandos do interpretador Bash par
 6. [listagem e navegação](#listagem-e-navegação)  
 7. [gerenciamento de arquivos e diretórios](#gerenciamento-de-arquivos-e-diretórios)  
 8. [gerenciamento de armazenamento](#gerenciamento-de-armazenamento)
-9. [compactar e extrair arquivos](#compactar-e-extrair-arquivos)
-10. [Secure Shell (SSH)](#secure-shell-ssh)
-11. [edição de texto](#edição-de-texto)
+9. [gerenciamento de serviços](#gerenciamento-de-serviços)
+10. [compactar e extrair arquivos](#compactar-e-extrair-arquivos)
+11. [Secure Shell (SSH)](#secure-shell-ssh)
+12. [edição de texto](#edição-de-texto)
 
 ## informações do usuário e ambiente
 
 ```bash
 $ whoami			
 # exibe o nome do usuário atual
+
+$ id <nome-user>
+# exibe informações de id do usuário
 
 $ pwd 
 # exibe o caminho absoluto do diretório atual 
@@ -54,6 +58,10 @@ $ top
 $ pstree
 # exibe os processos em formato de árvore
 
+$ ps aux
+# também lista processos, mas sem limpar a tela
+# ps -ef é uma alternativa
+
 $ pgrep -f <pid>
 # pesquisa processo pelo pid
 # não retorna nada se o processo não estiver ativo
@@ -65,6 +73,9 @@ $ pgrep -f <pid>
 $ sudo useradd <nome>
 # cria novo usuário
 
+$ su <nome>
+# alterna o usuário
+
 $ sudo userdel <nome>
 # deleta o usuário, mas mantém sua home 
 
@@ -73,6 +84,9 @@ $ sudo userdel -r <nome>
 
 $ sudo useradd -m joker
 # além do novo usuário, cria o diretório home automaticamente
+
+$ sudo useradd -s /usr/sbin/nologin <nome>
+# adiciona usuário com shell não-interativo
 
 $ sudo useradd -m -d /home/arkham joker
 # permite definir o nome e diretório da home do usuário antes de criá-lo
@@ -85,6 +99,16 @@ $ sudo usermod -s /bin/bash joker
 
 $ sudo usermod -aG sudo joker
 # adiciona usuário a um grupo (neste caso, sudo)
+
+$ sudo usermod -e 2028-01-28 joker
+# define a data de validade pra uma conta
+
+$ sudo chage -E never joker
+# chage = change age
+# faz o mesmo que o comando anterior, 'never' permite remover a validade
+
+$ sudo chage -l joker
+# exibe informações sobre a idade da conta
 
 $ ls -ld /home/arkham
 # checa se o diretório home existe
@@ -267,6 +291,9 @@ $ rm arquivo.txt
 $ rm -i arquivo.txt
 # solicita confirmação antes de excluir (mais seguro)
 
+$ rm -r pasta/
+# remove diretório
+
 $ rm -rf pasta/
 # remove de forma recursiva e forçada (apaga tudo sem perguntar)
 # USAR COM CAUTELA
@@ -299,6 +326,25 @@ $ du -h ~
 
 $ free -m
 # exibe informações da memória
+```
+
+## gerenciamento de serviços
+
+```bash
+$ systemctl status <nome-serviço>
+# exibe informações sobre o serviço
+
+$ systemctl start <nome-serviço>
+# inicia o serviço
+
+$ systemctl stop <nome-serviço>
+# encerra o serviço
+
+$ systemctl enable <nome-serviço>
+# permite que ele inicie junto com o boot do sistema
+
+$ systemctl disable <nome-serviço>
+# desativa um serviço
 ```
 
 ## compactar e extrair arquivos
