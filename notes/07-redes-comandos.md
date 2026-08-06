@@ -4,6 +4,8 @@ este documento é composto por descrições de comandos no contexto de redes em 
 
 ---
 
+## IP
+
  ```bash 
  $ ip a  # exibe informações detalhadas sobre as interfaces de rede
  ```
@@ -29,3 +31,19 @@ $ ip route # exibe informações sobre o gateway da rede atual
 ```
 
 > `default via 192.168.1.1` indica que todo tráfego sem destino definido será enviado para `192.168.1.1` , que é o gateway.
+
+---
+
+## DNS
+
+```bash
+$ cat /etc/hosts # este arquivo mapeia domínios e hostnames para endereços de IP localmente
+
+$ getent hosts # também exibe os domínios e hostnames assim como o comando anterior
+
+$ cat /etc/resolv.conf # este arquivo conté info sobre o DNS server (nameserver)
+
+$ nslookup <dominio> # consulta de domínio ou IP
+
+$ dig <dominio> # faz o mesmo que o anterior, mas com detalhes adicionais
+```
