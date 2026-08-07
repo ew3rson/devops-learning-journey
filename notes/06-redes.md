@@ -4,6 +4,25 @@ esse documento contém anotações de conceitos e informações sobre redes, com
 
 ---
 
+## sumário
+
+- [fundamentos](#fundamentos)
+- [IP](#ip)
+  - [WAN, LAN e WLAN](#wan-lan-e-wlan)
+- [como um roteador funciona](#como-um-roteador-funciona)
+  - [saltos ou hops](#saltos-ou-hops)
+- [gateway, subnet e CIDR](#gateway-subnet-e-cidr)
+  - [gateway](#gateway)
+  - [sub-rede e máscara de sub-rede](#sub-rede-e-máscara-de-sub-rede)
+  - [CIDR](#cidr)
+    - [calculando hosts disponíveis](#calculando-hosts-disponíveis)
+      - [exemplo](#exemplo)
+- [DNS](#dns)
+- [TCP/IP, OSI, camada de transporte e portas](#tcpip-osi-camada-de-transporte-e-portas)
+  - [protocolos TCP e UDP](#protocolos-tcp-e-udp)
+    - [TCP](#tcp)
+    - [UDP](#udp)
+    
 ## fundamentos
 
 - uma **rede de computadores** é um conjunto de dispositivos que **interagem** entre si a fim de **trocar** recursos e informações.
@@ -140,3 +159,34 @@ cálculo:
 > `github.com` — domínio (*nome do contato*)  
 > `140.82.112.4` — endereço IP (*número do contato*)
 
+## TCP/IP, OSI, camada de transporte e portas
+
+- a comunicação na internet é abstraída em modelos de camadas, sendo eles **OSI (o mais teórico e extenso com 7 camadas)**, e **TCP/IP (mais prático, mais usado e com 4 ou 5 camadas)**
+- a **camada de transporte** existe em ambos, e é responsável pela comunicação entre processos/aplicações
+- a **camada de rede** (3ª no modelo OSI), é responsável por transportar pacotes de dados entre redes, ela usa os endereços de IP para encontrar os destinos e define rotas
+- quando o pacote chega no destino, é a **camada de transporte que define** quem deve recebê-lo, utilizando o conceito de **portas**
+- dessa forma, é possível saber exatamente **qual programa deve receber os dados**
+
+>[!NOTE]
+>portas são identificadas pelo seu **número** e **protocolo *(tipo da comunicação)***:  
+>
+>`porta 443/TCP`
+>`porta 53/UDP`
+
+## protocolos TCP e UDP 
+
+### TCP
+
+- o **protocolo TCP** é o mais utilizado, é conhecido por garantir **confiabilidade**, ou seja, por focar na **garantia de entrega** do pacote de dados
+- ele utiliza alguns mecanismos para assegurar a confiabilidade: **handshake**, **números de sequência e confirmação** e **controle de fluxo**
+	- **handshake:** o pacote só começa a ser enviado se o destino aceitar  
+	- **números de sequência e confirmação:** o TCP quebra os dados em pedaços menores para serem transmitidos, cada pedaço recebe um número de sequência para serem remontados posteriormente na ordem correta; o receptor envia uma confirmação (ACK) para cada pedaço recebido e, se necessário, o transmissor reenvia pedaços em falta  
+	- **controle de fluxo:** o TCP garante que a velocidade do transmissor fique em sintonia com a do receptor, evitando sobrecarga  
+- esses mecanismos garantem a **comunicação entre origem e destino** durante a transferência de dados, garantindo que todos os pacotes sejam entregues da melhor forma possível 
+
+### UDP
+
+- ele troca a confiabilidade do TCP por **velocidade** e não possui nenhum dos mecanismos que garantem a entrega dos pacotes que o TCP possui
+- alguns exemplos de uso do UDP são: 
+	- jogos online ─ em um jogo de FPS, a posição atual do jogador é mais importante, por essa razão, os gráficos nem sempre acompanham a mudança real de posição
+	- streaming ao vivo ─ em uma chamada de vídeo, é comum ver deformações na transmissão, isso acontece porque a baixa latência é mais importante do que a qualidade do vídeo
