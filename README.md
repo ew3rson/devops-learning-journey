@@ -27,8 +27,8 @@ foco em aprendizado prático e construção de base sólida para atuação em am
 - [x] Git e versionamento  
 - [x] Bash scripting (básico)
 - [x] fundamentos de cloud computing (AWS)
-- [ ] fundamentos de redes ─ *em andamento*
-- [ ] containerização (Docker / Podman) ─ *em andamento*
+- [ ] fundamentos de redes – *em andamento*
+- [ ] containerização (Docker / Podman) – *em andamento*
 - [ ] CI/CD (GitHub Actions)
 
 ## 🗃 sumário
@@ -41,8 +41,8 @@ foco em aprendizado prático e construção de base sólida para atuação em am
 - [Linux | anotações](notes/05-linux.md)
 - [redes | anotações](notes/06-redes.md)
 - [comandos de rede no Linux](notes/07-redes-comandos.md)
-- [Docker | anotações](notes/08-docker)
-- [comandos Docker](notes/09-docker-comandos)
+- [Docker | anotações](notes/08-docker.md)
+- [comandos Docker](notes/09-docker-comandos.md)
 
 ### 🐚 Bash
 
